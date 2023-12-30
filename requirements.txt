@@ -1,0 +1,7 @@
+pandas
+configparser
+sqlalchemy
+psycopg2
+
+
+

@@ -1,0 +1,39 @@
+version: "3"
+
+services: 
+  etl:
+    image: etl
+    container_name: etl
+    build:
+      context: .
+    volumes:
+      - ./:/app
+
+  warehouse: 
+    image: postgres:13
+    container_name: warehouse
+    environment: 
+      POSTGRES_USER: dorian
+      POSTGRES_PASSWORD: 1412
+      POSTGRES_DB: retail_sales
+    volumes: 
+      - postgres-volume:/var/lib/postgresql/data
+    restart: always
+    ports: 
+      - "5432:5432"
+
+  metabase:
+    image: metabase/metabase:latest
+    container_name: metabase
+    hostname: metabase
+    volumes:
+    - urandom:/dev/random:ro
+    ports:
+      - 3000:3000
+    restart: always
+
+volumes:
+  postgres-volume:
+  urandom: 
+
+
