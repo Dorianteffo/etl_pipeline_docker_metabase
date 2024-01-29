@@ -14,6 +14,7 @@ In this project, we will initially use Python and SQLAlchemy to load a CSV file 
 ## Run the pipeline
 Here are the commands to set up the environment:
 * `make up`: Create and run all the containers.
+* `make ci`: Format, and run the tests
 * `make etl`: Run the pipeline.
 * `make warehouse`: Connect to the Postgres database and check the data.
 * Go to localhost:3000 to open Metabase.
