@@ -8,16 +8,23 @@ services:
       context: .
     volumes:
       - ./:/app
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
 
   warehouse: 
     image: postgres:13
     container_name: warehouse
     environment: 
-      POSTGRES_USER: dorian
-      POSTGRES_PASSWORD: 1412
-      POSTGRES_DB: retail_sales
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes: 
       - postgres-volume:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
     restart: always
     ports: 
       - "5432:5432"
