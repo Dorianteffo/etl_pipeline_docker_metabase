@@ -6,6 +6,7 @@
 * Python
 * Metabase
 * Postgresql
+* Github actions (ci/cd)
 
 
 ## Project Overview 
