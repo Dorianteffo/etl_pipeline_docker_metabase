@@ -2,11 +2,11 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from pipeline.ingestion.to_landing import load_table_to_landing
+# from pipeline.ingestion.to_landing import load_table_to_landing
 from pipeline.transformation.etl import (
     clean_data,
     create_schema,
-    load_tables_staging,
+    # load_tables_staging,
 )
 
 
