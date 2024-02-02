@@ -2,12 +2,11 @@ up:
 	docker compose --env-file .env up --build -d
 
 etl: 
-	docker exec etl python pipeline/to_landing.py
-	docker exec etl python pipeline/etl.py
+	docker exec etl python pipeline/main_pipeline.py
 
 
-# pytest:
-# 	docker exec etl python -m pytest -p no:warnings -v
+pytest:
+	docker exec etl python -m pytest -p no:warnings -v
 
 
 format:
@@ -26,7 +25,7 @@ lint:
 	docker exec etl flake8 .
 
 
-ci: isort format type lint #pytest
+ci: isort format type lint pytest
 
 
 warehouse: 
