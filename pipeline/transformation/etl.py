@@ -1,7 +1,6 @@
 import logging
 
 import pandas as pd
-from connection import close_conn, create_conn
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 
 def read_table(engine, table_name):
-    # read data from the landing schema
+    """read data from the landing schema"""
     try:
         df = pd.read_sql_query(
             f'SELECT * FROM landing_area."{table_name}"', engine
@@ -24,7 +23,7 @@ def read_table(engine, table_name):
         logger.error(f'Enable to read data from landing_area: {e}')
 
 
-def transform_data(df):
+def clean_data(df):
     # data cleaning
     df['SUPPLIER'] = df['SUPPLIER'].fillna("NO SUPPLIER")
     df['ITEM TYPE'] = df['ITEM TYPE'].fillna("NO ITEM TYPE")
@@ -33,8 +32,9 @@ def transform_data(df):
     return df
 
 
-def data_modeling(df):
-    # building the star schema
+def create_schema(df):
+    """Build a star schema"""
+
     supplier_df = df[['SUPPLIER']]
     supplier_df = supplier_df.drop_duplicates()
     supplier_df = supplier_df.reset_index(drop=True)
@@ -83,7 +83,7 @@ def data_modeling(df):
 
 
 def load_tables_staging(dict, engine):
-    # load the tables to the staging schema for visualization
+    """load the tables to the staging schema for visualization"""
     try:
         for df_name, value_dict in dict.items():
             value_df = pd.DataFrame(value_dict)
@@ -107,9 +107,10 @@ def load_tables_staging(dict, engine):
         logger.error(f"Enable to load the data to staging area : {e}")
 
 
-if __name__ == "__main__":
-    engine = create_conn()
-    df = read_table(engine, "Retail_sales")
-    dict_tables = data_modeling(df)
-    load_tables_staging(dict_tables, engine)
-    close_conn(engine)
+# if __name__ == "__main__":
+#     engine = create_conn()
+#     df = read_table(engine, "Retail_sales")
+#     df_clean = clean_data(df)
+#     dict_tables = create_schema(df_clean)
+#     load_tables_staging(dict_tables, engine)
+#     close_conn(engine)
