@@ -22,11 +22,3 @@ def load_table_to_landing(df, engine, table_name):
     except Exception as e:
         logger.error("!!!!!!!!!!!!!!!!!!!!!!")
         logger.error(f"Enable to load the data to landing area : {e}")
-
-
-# if __name__ == "__main__":
-#     file_path = "dataset/Warehouse_and_Retail_Sales.csv"
-#     engine = create_conn()
-#     df = pd.read_csv(file_path)
-#     load_table_to_landing(df, engine, "Retail_sales")
-#     close_conn(engine)
