@@ -100,17 +100,8 @@ def load_tables_staging(dict, engine):
             )
 
             logger.info('!!!!!!!!')
-            logger.info(f'Table {df_name} load succesfully')
+            logger.info(f'Table {df_name} loaded succesfully')
 
     except Exception as e:
         logger.error("!!!!!!!!!!!!!!!!!!!!!!")
         logger.error(f"Enable to load the data to staging area : {e}")
-
-
-# if __name__ == "__main__":
-#     engine = create_conn()
-#     df = read_table(engine, "Retail_sales")
-#     df_clean = clean_data(df)
-#     dict_tables = create_schema(df_clean)
-#     load_tables_staging(dict_tables, engine)
-#     close_conn(engine)
